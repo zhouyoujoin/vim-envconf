@@ -1,0 +1,69 @@
+" vim setting for Justin's favourate
+
+" Basic setting
+"cd `pwd`
+
+set number  "show line number
+set hlsearch    "highlight the search result
+set tabstop=4   "set tab key width
+set shiftwidth=4    "auto-indent amount when using cindent
+set expandtab   "expand the tab key as blank, if set, shell script will be failed.
+set autoindent  "automatical section indent 
+"set autochdir   "automate to change the directory, if set, cscope can't open search result.
+set tags+=./tags;    "set the current directory as the project root directory.
+set nobackup    "don't backup file after edit
+set cursorline  "add line at the cursor position
+set mouse=a     "support mouse
+set ttymouse=xterm2   "support mouse middle roll button
+set history=100     "set history number
+set nocompatible    "setting for vim
+set smartindent     "smart indent
+set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]   "config status content about file,date,line,column
+set laststatus=2 "show or hide status infomration under screen
+
+colorscheme desert  "colore scheme
+
+syntax enable       "enable syntax
+syntax on           "syntax on
+
+" remaping searching function for cscope
+if has("cscope")
+    "set current directory as cscope root directory
+    cs add ./
+
+    nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+	" remapping quick call back
+    nnoremap <F5> :cs find c <C-R>=expand("<cword>")<CR><CR>
+endif
+
+" remapping quick definition
+nnoremap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
+" remapping quick search key
+nnoremap <silent> <F3> :Regrep<CR>
+
+" setting for NERD_tree
+"if has("NERD_tree")
+nnoremap <F2> :NERDTreeToggle<CR>
+"endif
+
+" setting for taglist
+"if has('Tlist_Ctags_Cmd')
+    let Tlist_Show_One_File = 1            
+    let Tlist_Exit_OnlyWindow = 1        
+    let Tlist_Use_Right_Window = 1        
+    let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+    let Tlist_GainFocus_On_ToggleOpen = 1
+
+    nnoremap <F4> :TlistToggle<CR>
+	" remapping switch among different definitions
+    nnoremap <F12> :tnext<CR>
+    nnoremap <C-F12> :tprev<CR>
+"endif
